@@ -1,27 +1,52 @@
+# Configurazione per BigQuery con MCP Toolbox
 sources:
-  my_db:
+  my-bigquery-source:
     kind: bigquery
-    location: EU
-    project: hip-nuova-folati
-
+    project_id: "${BQ_PROJECT_ID}"
+    # Usa service account key da variabile d'ambiente
+    service_account_key: "${BQ_SERVICE_ACCOUNT_KEY}"
+    
 tools:
-  list_tables:
-    kind: bigquery-list-table-ids
-    source: my_db
-    description: Elenca tutte le tabelle nel progetto BigQuery
-
-  get_table_info:
-    kind: bigquery-get-table-info
-    source: my_db
-    description: Restituisce lo schema di una tabella
-
-  exec_sql:
-    kind: bigquery-execute-sql
-    source: my_db
-    description: Esegue una query SQL arbitraria
+  query-bigquery:
+    kind: bigquery-sql
+    source: my-bigquery-source
+    description: Execute SQL queries on BigQuery
+    parameters:
+      - name: query
+        type: string
+        description: The SQL query to execute
+    # Limita le query per sicurezza
+    max_results: 1000
+    
+  get-table-schema:
+    kind: bigquery-describe
+    source: my-bigquery-source
+    description: Get schema information for a BigQuery table
+    parameters:
+      - name: dataset_id
+        type: string
+        description: The dataset ID
+      - name: table_id
+        type: string
+        description: The table ID
+        
+  list-datasets:
+    kind: bigquery-list-datasets
+    source: my-bigquery-source
+    description: List all datasets in the project
+    
+  list-tables:
+    kind: bigquery-list-tables
+    source: my-bigquery-source
+    description: List all tables in a dataset
+    parameters:
+      - name: dataset_id
+        type: string
+        description: The dataset ID
 
 toolsets:
-  chat-with-db:
-    - list_tables
-    - get_table_info
-    - exec_sql
+  bigquery-toolset:
+    - query-bigquery
+    - get-table-schema
+    - list-datasets
+    - list-tables
