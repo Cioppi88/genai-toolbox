@@ -1,8 +1,9 @@
 sources:
   my_db:
     kind: bigquery
-    project_id: hip-nuova-folati
     location: EU
+    credentials:
+      project_id: hip-nuova-folati
 
 tools:
   list_tables:
