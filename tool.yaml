@@ -2,6 +2,7 @@ sources:
   my_db:
     kind: bigquery
     location: EU
+    project: hip-nuova-folati
 
 tools:
   list_tables:
