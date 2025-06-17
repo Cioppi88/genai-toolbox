@@ -1,0 +1,21 @@
+# Variabili d'ambiente locali
+.env
+.env.local
+.env.production
+
+# Chiavi di servizio GCP
+*.json
+service-account-key.json
+
+# Log
+*.log
+
+# Dipendenze
+node_modules/
+
+# Railway
+.railway/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
