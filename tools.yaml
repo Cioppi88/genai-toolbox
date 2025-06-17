@@ -1,11 +1,4 @@
 # Configurazione per BigQuery con MCP Toolbox
-sources:
-  my-bigquery-source:
-    kind: bigquery
-    config:
-      project_id: "${BQ_PROJECT_ID}"
-      service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
-    
 tools:
   query-bigquery:
     kind: bigquery-sql
@@ -17,6 +10,14 @@ tools:
         description: The SQL query to execute
     # Limita le query per sicurezza
     max_results: 1000
+  list-datasets:
+    kind: bigquery-list-datasets
+    project_id: "${BQ_PROJECT_ID}"
+    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
+  query-bigquery:
+    kind: bigquery-sql
+    project_id: "${BQ_PROJECT_ID}"
+    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
     
   get-table-schema:
     kind: bigquery-describe
