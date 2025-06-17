@@ -1,15 +1,15 @@
-FROM debian:bullseye-slim
+# Usa l'immagine ufficiale del toolbox
+FROM us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:0.4.0
 
-RUN apt-get update && apt-get install -y curl ca-certificates jq && rm -rf /var/lib/apt/lists/*
-
-RUN curl -L https://storage.googleapis.com/genai-toolbox/v0.7.0/linux/amd64/toolbox -o /usr/local/bin/toolbox \
-    && chmod +x /usr/local/bin/toolbox
-
+# Crea directory di lavoro
 WORKDIR /app
 
-COPY tool.yaml /app/tool.yaml
+# Copia il file di configurazione
+COPY tools.yaml .
 
-# Questa è la parte fondamentale:
-CMD sh -c "echo \"$GOOGLE_APPLICATION_CREDENTIALS_JSON\" > /app/gcp-creds.json && \
-export GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-creds.json && \
-toolbox --tools-file /app/tool.yaml --port $PORT"
+# Esponi la porta (Railway usa PORT env var)
+ENV PORT=5000
+EXPOSE $PORT
+
+# Comando per avviare il toolbox
+CMD ["./toolbox", "--tools_file", "tools.yaml", "--port", "$PORT"]
