@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY tool.yaml /app/tool.yaml
 
-# Importante: lascia che CMD venga eseguito a runtime
+# Questa è la parte fondamentale:
 CMD sh -c "echo \"$GOOGLE_APPLICATION_CREDENTIALS_JSON\" > /app/gcp-creds.json && \
 export GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-creds.json && \
 toolbox --tools-file /app/tool.yaml --port $PORT"
