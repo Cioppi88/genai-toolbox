@@ -1,0 +1,15 @@
+sources:
+  my-db:
+    kind: bigquery
+    project_id: tuo-progetto-gcp
+    location: EU
+
+tools:
+  exec_sql:
+    kind: bigquery-execute-sql
+    source: my-db
+    description: Esegue query SQL
+
+toolsets:
+  chat-with-db:
+    - exec_sql
