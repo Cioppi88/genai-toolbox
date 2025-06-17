@@ -1,15 +1,24 @@
 sources:
   my-db:
     kind: bigquery
-    project_id: tuo-progetto-gcp
+    project_id: tuo-project-id
     location: EU
 
 tools:
+  list_tables:
+    kind: bigquery-list-table-ids
+    source: my-db
+
+  get_table_info:
+    kind: bigquery-get-table-info
+    source: my-db
+
   exec_sql:
     kind: bigquery-execute-sql
     source: my-db
-    description: Esegue query SQL
 
 toolsets:
   chat-with-db:
+    - list_tables
+    - get_table_info
     - exec_sql
