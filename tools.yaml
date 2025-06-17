@@ -3,8 +3,7 @@ sources:
   my-bigquery-source:
     kind: bigquery
     project_id: "${BQ_PROJECT_ID}"
-    # Usa service account key da variabile d'ambiente
-    service_account_key: "${BQ_SERVICE_ACCOUNT_KEY}"
+    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
     
 tools:
   query-bigquery:
