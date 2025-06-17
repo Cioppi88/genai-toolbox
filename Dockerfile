@@ -9,8 +9,7 @@ WORKDIR /app
 
 COPY tool.yaml /app/tool.yaml
 
-# Salva le credenziali da variabile JSON
-# ATTENZIONE: questa parte deve essere CMD (non RUN) per leggere la variabile al runtime su Railway
-CMD echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /app/gcp-creds.json && \
-    export GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-creds.json && \
-    toolbox --tools-file /app/tool.yaml --port 5000
+# Importante: lascia che CMD venga eseguito a runtime
+CMD sh -c "echo \"$GOOGLE_APPLICATION_CREDENTIALS_JSON\" > /app/gcp-creds.json && \
+export GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-creds.json && \
+toolbox --tools-file /app/tool.yaml --port $PORT"
