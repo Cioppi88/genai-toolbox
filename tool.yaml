@@ -1,5 +1,5 @@
 sources:
-  my-db:
+  my_db:
     kind: bigquery
     project_id: hip-nuova-folati
     location: EU
@@ -7,15 +7,18 @@ sources:
 tools:
   list_tables:
     kind: bigquery-list-table-ids
-    source: my-db
+    source: my_db
+    description: Elenca tutte le tabelle nel progetto BigQuery
 
   get_table_info:
     kind: bigquery-get-table-info
-    source: my-db
+    source: my_db
+    description: Restituisce lo schema di una tabella
 
   exec_sql:
     kind: bigquery-execute-sql
-    source: my-db
+    source: my_db
+    description: Esegue una query SQL arbitraria
 
 toolsets:
   chat-with-db:
