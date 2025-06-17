@@ -1,11 +1,15 @@
-# Configurazione per BigQuery con MCP Toolbox
 sources:
   my-bigquery-source:
     kind: bigquery
     project_id: "${BQ_PROJECT_ID}"
     service_account_key: "${BQ_SERVICE_ACCOUNT_KEY}"
-    
+
 tools:
+  list-datasets:
+    kind: bigquery-list-datasets
+    source: my-bigquery-source
+    description: List all datasets in the project
+
   query-bigquery:
     kind: bigquery-sql
     source: my-bigquery-source
@@ -14,38 +18,8 @@ tools:
       - name: query
         type: string
         description: The SQL query to execute
-    # Limita le query per sicurezza
-    max_results: 1000
-    
-  get-table-schema:
-    kind: bigquery-describe
-    source: my-bigquery-source
-    description: Get schema information for a BigQuery table
-    parameters:
-      - name: dataset_id
-        type: string
-        description: The dataset ID
-      - name: table_id
-        type: string
-        description: The table ID
-        
-  list-datasets:
-    kind: bigquery-list-datasets
-    source: my-bigquery-source
-    description: List all datasets in the project
-    
-  list-tables:
-    kind: bigquery-list-tables
-    source: my-bigquery-source
-    description: List all tables in a dataset
-    parameters:
-      - name: dataset_id
-        type: string
-        description: The dataset ID
 
 toolsets:
   bigquery-toolset:
-    - query-bigquery
-    - get-table-schema
     - list-datasets
-    - list-tables
+    - query-bigquery
