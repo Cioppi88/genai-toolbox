@@ -2,6 +2,8 @@
 tools:
   query-bigquery:
     kind: bigquery-sql
+    project_id: "${BQ_PROJECT_ID}"
+    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
     source: my-bigquery-source
     description: Execute SQL queries on BigQuery
     parameters:
@@ -10,14 +12,6 @@ tools:
         description: The SQL query to execute
     # Limita le query per sicurezza
     max_results: 1000
-  list-datasets:
-    kind: bigquery-list-datasets
-    project_id: "${BQ_PROJECT_ID}"
-    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
-  query-bigquery:
-    kind: bigquery-sql
-    project_id: "${BQ_PROJECT_ID}"
-    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
     
   get-table-schema:
     kind: bigquery-describe
@@ -35,6 +29,8 @@ tools:
     kind: bigquery-list-datasets
     source: my-bigquery-source
     description: List all datasets in the project
+    project_id: "${BQ_PROJECT_ID}"
+    service_account_key_base64: "${BQ_SERVICE_ACCOUNT_KEY_B64}"
     
   list-tables:
     kind: bigquery-list-tables
