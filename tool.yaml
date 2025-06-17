@@ -1,7 +1,7 @@
 sources:
   my-db:
     kind: bigquery
-    project_id: tuo-project-id
+    project_id: hip-nuova-folati
     location: EU
 
 tools:
