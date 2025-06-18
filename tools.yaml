@@ -4,17 +4,11 @@ sources:
     project: "${BQ_PROJECT_ID}"
 
 tools:
-  list-datasets:
-    kind: bigquery-list-dataset-ids
-    source: bigquery-source
-    description: Lista tutti i dataset disponibili nel progetto BigQuery
-    
   execute-sql:
     kind: bigquery-execute-sql
     source: bigquery-source
-    description: Esegue query SQL personalizzate su BigQuery
+    description: Esegue query SQL contro BigQuery
 
 toolsets:
   bigquery-tools:
-    - list-datasets
     - execute-sql
