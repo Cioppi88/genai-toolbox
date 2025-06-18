@@ -4,11 +4,25 @@ sources:
     project: "${BQ_PROJECT_ID}"
 
 tools:
-  execute-sql:
-    kind: bigquery-execute-sql
+  query-datasets:
+    kind: bigquery-sql
     source: bigquery-source
-    description: Esegue query SQL contro BigQuery
+    description: Lista tutti i dataset disponibili nel progetto BigQuery
+    statement: |
+      SELECT schema_name as dataset_id 
+      FROM INFORMATION_SCHEMA.SCHEMATA
+    
+  query-sql:
+    kind: bigquery-sql
+    source: bigquery-source
+    description: Esegue query SQL personalizzate su BigQuery
+    parameters:
+      - name: sql_query
+        type: string
+        description: La query SQL da eseguire
+    statement: "{sql_query}"
 
 toolsets:
   bigquery-tools:
-    - execute-sql
+    - query-datasets
+    - query-sql
