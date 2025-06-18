@@ -5,19 +5,14 @@ sources:
 
 tools:
   list-bigquery-datasets:
-    kind: bigquery-list-datasets
+    kind: bigquery-list-dataset-ids
     source: bigquery-source
     description: Lista tutti i dataset disponibili nel progetto BigQuery
     
   query-bigquery-sql:
-    kind: bigquery-sql
+    kind: bigquery-execute-sql
     source: bigquery-source
     description: Esegue query SQL personalizzate su BigQuery
-    parameters:
-      - name: query
-        type: string
-        description: La query SQL da eseguire
-    statement: "{query}"
 
 toolsets:
   bigquery-tools:
